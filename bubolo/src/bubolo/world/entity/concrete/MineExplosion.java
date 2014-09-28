@@ -70,7 +70,6 @@ public class MineExplosion extends Effect
 		return this.EXPLOSION_LENGTH;
 	}
 	
-	
 	@Override
 	public void update(World world)
 	{
