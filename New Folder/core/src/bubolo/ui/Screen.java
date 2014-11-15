@@ -61,7 +61,7 @@ public abstract class Screen
 		
 		if (debug)
 		{
-			Table.drawDebug(stage);
+			//Table.drawDebug(stage);
 		}
 	}
 	

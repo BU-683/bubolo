@@ -6,7 +6,7 @@ import java.nio.file.Path;
 
 import javax.swing.JOptionPane;
 
-import org.json.simple.parser.ParseException;
+//import org.json.simple.parser.ParseException;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;

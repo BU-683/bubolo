@@ -1,6 +1,8 @@
 package bubolo.graphics;
 
 import java.io.File;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -30,7 +32,7 @@ public class Graphics
 	/**
 	 * File path where textures are stored.
 	 */
-	public static final String TEXTURE_PATH = "res/textures/";
+	public static final String TEXTURE_PATH = "/New Folder/core/res/textures/";
 
 	/**
 	 * The target number of draw ticks per second.
@@ -116,7 +118,33 @@ public class Graphics
 		}
 		instance = null;
 	}
+	
+	/**
+	 * Creates the graphics system. with pre loaded textures.  
+	 * this allows the texture file reading to be abstracted 
+	 * from the graphics system
+	 * 
+	 * @param windowWidth
+	 *            the width of the window, in pixels.
+	 * @param windowHeight
+	 *            the height of the window, in pixels.
+	 * @param textures 
+	 * 			  the list of of textures that has been loaded
+	 */
+	public Graphics(int windowWidth, int windowHeight, Map<String, Texture> textures)
+	{
+		camera = new OrthographicCamera(windowWidth, windowHeight);
+		batch = new SpriteBatch();
+		spriteSystem = Sprites.getInstance();
 
+		this.textures = textures;
+
+		synchronized (Graphics.class)
+		{
+			Graphics.instance = this;
+			spriteComparator = new SpriteComparator();
+		}
+	}
 	/**
 	 * Creates the graphics system.
 	 * 
@@ -337,6 +365,7 @@ public class Graphics
 	 */
 	private static void loadAllTextures()
 	{
+
 		File textureDirectory = new File(TEXTURE_PATH);
 		for (File file : textureDirectory.listFiles())
 		{
